@@ -1,0 +1,46 @@
+html			{
+	height: 100%;
+	width: 100%;
+}
+
+body			{
+	height: 100%;
+	width: 100%;
+}
+
+.main-container	{
+	background-color: rgb(200,200,255);
+	position: relative;
+	text-align: center;
+	width: 70%;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.title-box		{
+	background-color: rgb(222,222,255);
+	height: 15%;
+}
+
+.left-menu		{
+	background-color: rgb(200,255,200);
+	width: 25%;
+	float: left;
+}
+
+.messages		{
+	background-color: rgb(200,200,255);
+	width: 70%;
+	float: left;
+}
+
+.all-messages	{
+	background-color: rgb(255,255,200);
+	width: 90%
+}
+
+.user-messages	{
+	background-color: rgb(222,222,200);
+	width: 90%;
+}
