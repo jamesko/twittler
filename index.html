@@ -34,6 +34,30 @@
       $(".user-messages").text("no user selected")
       $(".all-messages").text("no messages received... yet")
       $("button").text("All Messages");
+      updateMessages("home");
+
+      //build user list
+      function updateUserList(){
+        users.forEach( function(name){
+          $user = $("<li>"+name+"</li>");
+          $user.appendTo(".user-list");
+        });
+      }
+
+      updateUserList();
+
+      //click to refresh routine
+      $(".update").on("click", function(){
+        if(currDisplay()===".all-messages"){
+          updateMessages("home")
+        }
+        else
+        {
+          updateMessages($(".user-messages").first(".user").first().text());
+        }
+      });
+
+      //click username and update page accordingly
 
 
       // toggle messages displayed and button text
@@ -49,7 +73,7 @@
         }        
       });
 
-      //build a single message element      
+      //build a single message element given a single message object  
       function buildMessageElement(msgObj){
         if($(".user-messages").text() === "no user selected"){
           $(".user-messages").text('');
@@ -63,7 +87,7 @@
         return "<div class='message'>" + uE + tE + mE +"</div>";
       }
 
-      //update message list
+      //update message list given the source (either 'home' or a specific user name).
       function updateMessages(source){
         var messagesDiv = (source==="home") ? ".all-messages": ".user-messages";
         var msgArray = (source==="home") ? streams.home: streams.users[source];
@@ -79,14 +103,10 @@
         }
       }
 
-      updateMessages("home");
-
-      //periodic updating routines
-
-
-
-
-
+      // return which messages are currently being displayed (all or a user's)
+      function currDisplay(){
+        return ($(".all-messages").css("display")!="none") ? ".all-messages":".user-messages";
+      }
 
 
     });
@@ -101,7 +121,7 @@
   </div>
   <div class="left-menu">
     <button></button>
-    <div class="user-list"></div>
+    <ul class="user-list"></ul>
   </div>
   <div class="messages">
       <div class="all-messages"></div>
