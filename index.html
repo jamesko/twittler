@@ -50,7 +50,7 @@
       });
 
       //build a single message element      
-      function buildAndAppendMessageElement(msgObj){
+      function buildMessageElement(msgObj){
         if($(".user-messages").text() === "no user selected"){
           $(".user-messages").text('');
         }
@@ -60,15 +60,32 @@
         var uE = "<div class='user'>"+user+"</div>";
         var tE = "<div class='time'>"+time+"</div>";
         var mE = "<div class='tweet'>"+msg+"</div>";
-        var tweet = "<div class='message'>" + uE + tE + mE +"</div>";
-        $(tweet).appendTo(".user-messages");
+        return "<div class='message'>" + uE + tE + mE +"</div>";
       }
 
-      buildAndAppendMessageElement(streams.home[0]);
+      //update message list
+      function updateMessages(source){
+        var messagesDiv = (source==="home") ? ".all-messages": ".user-messages";
+        var msgArray = (source==="home") ? streams.home: streams.users[source];
+        $(messagesDiv).empty();
 
+        var index = msgArray.length - 1;
+        var $tweet;
 
+        while(index >= 0){
+          $tweet = $(buildMessageElement(msgArray[index]));
+          $tweet.appendTo(messagesDiv);
+          index -= 1;
+        }
+      }
+
+      updateMessages("home");
 
       //periodic updating routines
+
+
+
+
 
 
 
@@ -78,7 +95,10 @@
     </script>
 
 <div class="main-container">
-  <div class="title-box">TWITTLER!</div>
+  <div class="title-box">
+    <h2>TWITTLER!</h2>
+    <div class="update">--click here to refresh--</div>
+  </div>
   <div class="left-menu">
     <button></button>
     <div class="user-list"></div>
