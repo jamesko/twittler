@@ -3,7 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-    <script src="jquery.timeago.js"></script>
+    <script src="http://timeago.yarp.com/jquery.timeago.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
@@ -25,12 +25,31 @@
     */
 
     $(document).ready(function(){
+
+      //initialize some elements
+      $(".user-messages").hide();
+      $(".user-messages").text("no user selected")
+      $("button").text("All Messages");
+
+
+      // toggle messages displayed and button text
+      $("button").on("click", function(){
+        $(".all-messages").toggle();
+        $(".user-messages").toggle();
+        if($(".all-messages").css("display")==="none"){
+          $("button").text("User Messages");
+        }
+        else
+        {
+          $("button").text("All Messages");
+        }        
+      });
+
       
       // Friendly Date use:
       // $.timeago(RawDateString.split(" ").slice(1,5).join(" ") )
 
       //build message element function
-      
 
 
     });
@@ -40,10 +59,10 @@
 
 <div class="main-container">
   <div class="title-box">TWITTLER!</div>
-  <div class="left-menu">left menu</div>
+  <div class="left-menu"><button></div>
   <div class="messages">
       <div class="all-messages">all messages</div>
-      <div class="user-messages">user messages</div>
+      <div class="user-messages"></div>
   </div>
 </div>
 
