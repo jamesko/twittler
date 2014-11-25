@@ -26,9 +26,13 @@
 
     $(document).ready(function(){
 
-      //initialize some elements
+      // Friendly Date use:
+      // $.timeago(RawDateString.split(" ").slice(1,5).join(" ") )
+
+      //initialize some elements      
       $(".user-messages").hide();
       $(".user-messages").text("no user selected")
+      $(".all-messages").text("no messages received... yet")
       $("button").text("All Messages");
 
 
@@ -45,11 +49,27 @@
         }        
       });
 
-      
-      // Friendly Date use:
-      // $.timeago(RawDateString.split(" ").slice(1,5).join(" ") )
+      //build a single message element      
+      function buildAndAppendMessageElement(msgObj){
+        if($(".user-messages").text() === "no user selected"){
+          $(".user-messages").text('');
+        }
+        var time = $.timeago(msgObj.created_at)
+        var user = msgObj.user;
+        var msg = msgObj.message;
+        var uE = "<div class='user'>"+user+"</div>";
+        var tE = "<div class='time'>"+time+"</div>";
+        var mE = "<div class='tweet'>"+msg+"</div>";
+        var tweet = "<div class='message'>" + uE + tE + mE +"</div>";
+        $(tweet).appendTo(".user-messages");
+      }
 
-      //build message element function
+      buildAndAppendMessageElement(streams.home[0]);
+
+
+
+      //periodic updating routines
+
 
 
     });
@@ -59,9 +79,12 @@
 
 <div class="main-container">
   <div class="title-box">TWITTLER!</div>
-  <div class="left-menu"><button></div>
+  <div class="left-menu">
+    <button></button>
+    <div class="user-list"></div>
+  </div>
   <div class="messages">
-      <div class="all-messages">all messages</div>
+      <div class="all-messages"></div>
       <div class="user-messages"></div>
   </div>
 </div>

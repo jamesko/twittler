@@ -30,17 +30,40 @@ body			{
 }
 
 .messages		{
-	background-color: rgb(200,200,255);
+	background-color: rgb(255,255,255);
 	width: 70%;
 	float: left;
 }
 
-.all-messages	{
-	background-color: rgb(255,255,200);
+.all-messages	{	
 	width: 90%
 }
 
 .user-messages	{
-	background-color: rgb(222,222,200);
+	background-color: rgb(255,255,255);
+	width: 90%;	
+}
+
+.message		{
+	text-align: left;
+	float: left;
 	width: 90%;
+}
+
+.user			{
+	text-align: left;
+	float: left;
+	width: 50%;	
+}
+
+.time			{
+	text-align: right;
+	float: left;
+	width: 50%;	
+}
+
+.tweet			{
+	text-align: left;
+	float: left;
+	width: 100%;	
 }
