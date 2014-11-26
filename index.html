@@ -8,26 +8,7 @@
   </head>
   <body>
     <script>
-    /*
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-      });
-    */
-
     $(document).ready(function(){
-
-      // Friendly Date use:
-      // $.timeago(RawDateString.split(" ").slice(1,5).join(" ") )
 
       //initialize some elements      
       $(".user-messages").hide();
@@ -35,16 +16,15 @@
       $(".all-messages").text("no messages received... yet")
       $("button").text("All Messages");
       updateMessages("home");
+      updateUserList();
 
       //build user list
       function updateUserList(){
         users.forEach( function(name){
-          $user = $("<li>"+name+"</li>");
+          $user = $("<li class='user'>"+name+"</li>");
           $user.appendTo(".user-list");
         });
       }
-
-      updateUserList();
 
       //click to refresh routine
       $(".update").on("click", function(){
@@ -53,25 +33,39 @@
         }
         else
         {
-          updateMessages($(".user-messages").first(".user").first().text());
+          updateMessages($(".user-messages .user").first().text());
         }
       });
 
       //click username and update page accordingly
+      ($(".user")).on("click", function(){        
+        updateMessages($(this).text());
+        toggleView("any arg");
+      })
 
-
-      // toggle messages displayed and button text
-      $("button").on("click", function(){
-        $(".all-messages").toggle();
-        $(".user-messages").toggle();
-        if($(".all-messages").css("display")==="none"){
-          $("button").text("User Messages");
+      //toggle message views. any arg toggles to user view
+      function toggleView(){
+        if(arguments.length===0){
+          $(".all-messages").toggle();
+          $(".user-messages").toggle();
+          if($(".all-messages").css("display")==="none"){
+            $("button").text("User Messages");
+          }
+          else
+          {
+            $("button").text("All Messages");
+          }
         }
         else
         {
-          $("button").text("All Messages");
-        }        
-      });
+          $(".all-messages").css("display","none");
+          $(".user-messages").css("display","block");
+          $("button").text("User Messages");
+        }
+      }
+
+      // toggle messages displayed and button text
+      $("button").on("click", function(){toggleView()});
 
       //build a single message element given a single message object  
       function buildMessageElement(msgObj){
@@ -90,12 +84,10 @@
       //update message list given the source (either 'home' or a specific user name).
       function updateMessages(source){
         var messagesDiv = (source==="home") ? ".all-messages": ".user-messages";
-        var msgArray = (source==="home") ? streams.home: streams.users[source];
+        var msgArray = (source==="home") ? streams.home: streams.users[source]; 
         $(messagesDiv).empty();
-
         var index = msgArray.length - 1;
         var $tweet;
-
         while(index >= 0){
           $tweet = $(buildMessageElement(msgArray[index]));
           $tweet.appendTo(messagesDiv);
@@ -107,11 +99,7 @@
       function currDisplay(){
         return ($(".all-messages").css("display")!="none") ? ".all-messages":".user-messages";
       }
-
-
     });
-
-
     </script>
 
 <div class="main-container">

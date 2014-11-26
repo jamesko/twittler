@@ -9,7 +9,7 @@ body			{
 }
 
 .main-container	{
-	background-color: gold;
+	border: 2px solid;
 	position: relative;
 	text-align: center;
 	width: 70%;
@@ -54,7 +54,7 @@ body			{
 	width: 90%;
 }
 
-.user			{
+.messages .user	{
 	text-align: left;
 	float: left;
 	width: 50%;	
@@ -86,4 +86,12 @@ h2				{
 
 li 				{
 	float: left;
+}
+
+.user:hover		{
+	font-weight: bold;
+}
+
+.update:hover	{
+	font-weight: bold;
 }
