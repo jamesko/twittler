@@ -12,14 +12,15 @@
 
       //initialize some elements      
       $(".user-messages").hide();
-      $(".user-messages").text("no user selected")
-      $(".all-messages").text("no messages received... yet")
+      $(".user-messages").text("no user selected");
+      $(".all-messages").text("no messages received... yet");
       $("button").text("All Messages");
       updateMessages("home");
       updateUserList();
 
       //build user list
       function updateUserList(){
+        $(".user-list").empty()
         users.forEach( function(name){
           $user = $("<li class='user'>"+name+"</li>");
           $user.appendTo(".user-list");
@@ -37,8 +38,9 @@
         }
       });
 
-      //click username and update page accordingly
-      ($(".user")).on("click", function(){        
+      //click event set for username updates
+      $("div").on("click", ".user", function(){
+        event.preventDefault();
         updateMessages($(this).text());
         toggleView("any arg");
       })
@@ -93,6 +95,7 @@
           $tweet.appendTo(messagesDiv);
           index -= 1;
         }
+        updateUserList();
       }
 
       // return which messages are currently being displayed (all or a user's)
