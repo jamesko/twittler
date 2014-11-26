@@ -71,9 +71,6 @@
 
       //build a single message element given a single message object  
       function buildMessageElement(msgObj){
-        if($(".user-messages").text() === "no user selected"){
-          $(".user-messages").text('');
-        }
         var time = $.timeago(msgObj.created_at)
         var user = msgObj.user;
         var msg = msgObj.message;
