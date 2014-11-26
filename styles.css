@@ -30,8 +30,10 @@ body			{
 }
 
 .messages		{
+	height: 70%;
 	width: 70%;
 	float: left;
+	overflow: auto;
 }
 
 .all-messages	{
@@ -85,7 +87,7 @@ h2				{
 }
 
 li 				{
-	float: left;
+	text-align: left;
 }
 
 .user:hover		{
